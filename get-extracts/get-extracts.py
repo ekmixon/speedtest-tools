@@ -34,9 +34,9 @@ compatible_urllib.install_opener(opener)
 opener.addheaders = [('Accept', 'application/json')]
 
 # setup authentication
-login_credentials = '%s:%s' % (username, password)
+login_credentials = f'{username}:{password}'
 base64string = base64.b64encode(login_credentials.encode('utf-8')).decode('ascii')
-opener.addheaders = [('Authorization', 'Basic %s' % base64string)]
+opener.addheaders = [('Authorization', f'Basic {base64string}')]
 
 # makes request for files
 try:
@@ -83,8 +83,8 @@ def download(files):
 
     for data_set, file in files.items():
         response = compatible_urllib.urlopen(file['url'])
-        flocation = storageDir + '/' + file['name']
-        print(("Downloading: %s" % (file['name'])))
+        flocation = f'{storageDir}/' + file['name']
+        print(f"Downloading: {file['name']}")
         with open(flocation, 'wb') as content:
             content.write(response.read())
 #############################################################
